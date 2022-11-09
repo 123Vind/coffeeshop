@@ -1,5 +1,4 @@
 import 'package:coffeeshop/provider/items.dart';
-import 'package:coffeeshop/screens/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -51,7 +50,7 @@ class ReceiptScreen extends StatelessWidget {
                   ),
              Expanded(child: ListView(
           
-               children: itemlist.map((e) => Row(
+               children: itemprovider.showreceipt().map((e) => Row(
                  crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
                    itemnames(name: e.itemName),

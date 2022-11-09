@@ -38,12 +38,16 @@ void changequantity(int index,int value){
 
 }
 
+List<Items> showreceipt(){
+  return itemList.where((e) =>e.quantity>0 ).toList();
+}
+
 void clear(){
   totalAmounts = 0.0;
   for(int i = 0;i<itemList.length;i++){
     itemList[i].quantity = 0;
   }
-
+notifyListeners();
 
 }
 
