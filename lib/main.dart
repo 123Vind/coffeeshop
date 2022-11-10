@@ -1,3 +1,5 @@
+import 'package:coffeeshop/provider/order.dart';
+import 'package:coffeeshop/screens/displayorder.dart';
 import 'package:coffeeshop/screens/editmenuscreen.dart';
 import 'package:coffeeshop/screens/historyscreen.dart';
 import 'package:coffeeshop/screens/receipt.dart';
@@ -20,6 +22,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create:(context)=>Itemprovider() ),
+        ChangeNotifierProvider(create:(context)=>OrderProvider() ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -32,8 +35,9 @@ class MyApp extends StatelessWidget {
         routes: {
           HomePage.routename:(context)=>const HomePage(),
           ReceiptScreen.routename:(context)=>const ReceiptScreen(),
-          EditMenuScreen.routename:(context)=>const EditMenuScreen(),
+          EditMenuScreen.routename:(context)=>EditMenuScreen(),
           HistoryScreen.routename:(context)=>const HistoryScreen(),
+          DisplayOrderScreen.routename:(context)=>const DisplayOrderScreen(),
         },
       ),
     );

@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
             child: ListView.builder(itemBuilder: (context,index){
                 return Cards(index: index);
             },
-            itemCount:  items.length,
+            itemCount:  itemsProvider.itemList.length,
             ),
           ),
          Container(

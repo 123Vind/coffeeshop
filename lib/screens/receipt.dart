@@ -2,6 +2,8 @@ import 'package:coffeeshop/provider/items.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../provider/order.dart';
+
 class ReceiptScreen extends StatelessWidget {
     static const routename = 'ReceiptScreen';
   const ReceiptScreen({Key? key}) : super(key: key);
@@ -9,6 +11,7 @@ class ReceiptScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final itemprovider = Provider.of<Itemprovider>(context);
+    final orderprovider = Provider.of<OrderProvider>(context);
     List<Items> itemlist = Provider.of<Itemprovider>(context).getItems;
   
     return Scaffold(
@@ -79,6 +82,12 @@ class ReceiptScreen extends StatelessWidget {
           ),
           InkWell(
                 onTap: (){
+                  itemprovider.seevalue();
+                  List<Items> item  = itemprovider.itemList;
+
+
+
+                  orderprovider.addOrder(Order(time: DateTime.now(), item:itemprovider.getreceipt()));
                   itemprovider.clear();
                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Order Completed'),duration: Duration(milliseconds: 1000),));
                  Navigator.pop(context);

@@ -11,7 +11,7 @@ class Cards extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-        List<Items> items = Provider.of<Itemprovider>(context).getItems;
+        List<Items> items = Provider.of<Itemprovider>(context).itemList;
         final itemprovider = Provider.of<Itemprovider>(context);
       return Container(
         height: 120,

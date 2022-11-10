@@ -20,6 +20,16 @@ double get totalAmount{
   return totalAmounts;
 }
 
+void addItems(Items additem){
+
+    itemList.add(additem);
+    log('item added');
+    log(itemList.toString());
+    notifyListeners();
+
+}
+
+
 void seevalue(){
   for(int i = 0;i<itemList.length;i++){
     log('${itemList[i].itemName} ${itemList[i].price} ${itemList[i].quantity}');
@@ -37,7 +47,19 @@ void changequantity(int index,int value){
   notifyListeners();
 
 }
+List<Items> getreceipt(){
+List<Items> it = [];
+  for(int i = 0;i<itemList.length;i++){
+      if(itemList[i].quantity>0){
+        it.add(
+          Items(itemName: itemList[i].itemName, price:itemList[i].price, size: itemList[i].size, category: itemList[i].category,quantity: itemList[i].quantity)
+        );
+      }
 
+     
+  }
+ return it;
+}
 List<Items> showreceipt(){
   return itemList.where((e) =>e.quantity>0 ).toList();
 }
