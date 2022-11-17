@@ -1,5 +1,7 @@
+import 'package:coffeeshop/provider/dbattributes.dart';
 import 'package:coffeeshop/provider/items.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/order.dart';
@@ -12,8 +14,8 @@ class ReceiptScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final itemprovider = Provider.of<Itemprovider>(context);
     final orderprovider = Provider.of<OrderProvider>(context);
-    List<Items> itemlist = Provider.of<Itemprovider>(context).getItems;
-  
+    List itemlist = Provider.of<Itemprovider>(context).getItems;
+    Box box = Hive.box(dbname.boxnameorder);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Receipt'),
@@ -56,9 +58,9 @@ class ReceiptScreen extends StatelessWidget {
                children: itemprovider.showreceipt().map((e) => Row(
                  crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
-                   itemnames(name: e.itemName),
-                   itemnames(name: e.quantity.toString()),
-                   itemnames(name: 'Rs.${e.price}'),
+                   itemnames(name: e[dbname.itemname]),
+                   itemnames(name: '${e[dbname.quantity]}'),
+                   itemnames(name: 'Rs.${e[dbname.price]}'),
                  ],
                )).toList(),
              )),
@@ -82,14 +84,13 @@ class ReceiptScreen extends StatelessWidget {
           ),
           InkWell(
                 onTap: (){
-                  itemprovider.seevalue();
-                  List<Items> item  = itemprovider.itemList;
-
-
-
-                  orderprovider.addOrder(Order(time: DateTime.now(), item:itemprovider.getreceipt()));
+                //itemprovider.seevalue();
+                   box.put(dbname.boxitemorder,{dbname.time:DateTime.now(),
+                   dbname.orderlist:itemprovider.getreceipt(),
+                    dbname.phone:'0987466352'
+                   });
                   itemprovider.clear();
-                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Order Completed'),duration: Duration(milliseconds: 1000),));
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Order Completed'),duration: Duration(milliseconds: 1000),));
                  Navigator.pop(context);
                 },
                 child: Container(

@@ -1,5 +1,5 @@
-import 'dart:developer';
 
+import 'package:coffeeshop/provider/dbattributes.dart';
 import 'package:coffeeshop/provider/items.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -67,7 +67,13 @@ var pricecontroller = TextEditingController();
                 if( _form.currentState!.validate()){
                       try{
                             if(double.parse(pricecontroller.text)>=0){
-                                  itemprovider.addItems(Items(itemName: namecontroller.text, price: double.parse(pricecontroller.text), size: 'S', category: 'Coffee'));
+                                  itemprovider.addItems({
+                                    dbname.itemname:namecontroller.text,
+                                    dbname.category:'coffee',
+                                    dbname.price:double.parse(pricecontroller.text),
+                                    dbname.quantity:0,
+                                    dbname.size:'S'
+                                    });
                          
                                   
                                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Item Added'),duration: Duration(milliseconds: 2000),));

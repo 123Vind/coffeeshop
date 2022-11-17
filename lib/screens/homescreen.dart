@@ -1,6 +1,11 @@
+import 'dart:developer';
+
+import 'package:coffeeshop/hivedb/dbhelper.dart';
+import 'package:coffeeshop/provider/dbattributes.dart';
 import 'package:coffeeshop/provider/items.dart';
 import 'package:coffeeshop/screens/receipt.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/appdrawer.dart';
@@ -16,9 +21,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Box box = Hive.box(dbname.boxname2);
+  DbHelper db = DbHelper();
+  @override
+  void initState() {
+    // TODO: implement initState
+    if(box.get(dbname.boxitemname)==null){
+        db.addinitials();
+    }
+    else{
+      log('not added');
+    }
+     
+    
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-    List<Items> items = Provider.of<Itemprovider>(context).getItems;
+    List items = Provider.of<Itemprovider>(context).getItems;
     final itemsProvider = Provider.of<Itemprovider>(context);
     return Scaffold(
       appBar: AppBar(

@@ -1,13 +1,13 @@
+import 'package:coffeeshop/provider/dbattributes.dart';
 import 'package:coffeeshop/screens/displayorder.dart';
 import 'package:flutter/material.dart';
 
-import '../provider/order.dart';
 class OrderCard extends StatelessWidget {
   const OrderCard({Key? key,
   required this.order,
   }) : super(key: key);
 
-  final Order order;
+  final Map order;
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +36,9 @@ class OrderCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             
-            Text(order.time.toString()),
+            Text(order[dbname.time].toString()),
             const SizedBox(height: 10,),
-            Text(order.phone),
+            Text(order[dbname.phone]),
           ],
         ),
       ),

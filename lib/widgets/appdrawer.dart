@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:coffeeshop/screens/editmenuscreen.dart';
 import 'package:coffeeshop/screens/historyscreen.dart';
+
 import 'package:flutter/material.dart';
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
@@ -34,7 +33,7 @@ class AppDrawer extends StatelessWidget {
           },
           ),
             const Divider(),
-             ListTile(leading: Icon(Icons.shop),
+          ListTile(leading: Icon(Icons.shop),
           title: Text('Edit Menu'),
           onTap: (){
             Navigator.pushNamed(context, EditMenuScreen.routename);

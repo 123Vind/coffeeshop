@@ -1,4 +1,4 @@
-import 'package:coffeeshop/provider/items.dart';
+import 'package:coffeeshop/provider/dbattributes.dart';
 import 'package:flutter/material.dart';
 
 import '../provider/order.dart';
@@ -51,7 +51,7 @@ class OrderItemCard extends StatelessWidget {
   const OrderItemCard({Key? key,
   required this.item
   }) : super(key: key);
-  final Items item;
+  final Map item;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -59,9 +59,9 @@ class OrderItemCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(item.itemName),
-           Text('${item.quantity}'),
-             Text('Rs. ${item.price}'),
+            Text(item[dbname.itemname]),
+           Text('${item[dbname.quantity]}'),
+             Text('Rs. ${item[dbname.price]}'),
        
             
            

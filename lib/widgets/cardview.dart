@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:coffeeshop/provider/dbattributes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +10,7 @@ class Cards extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-        List<Items> items = Provider.of<Itemprovider>(context).itemList;
+        List items = Provider.of<Itemprovider>(context).itemList;
         final itemprovider = Provider.of<Itemprovider>(context);
       return Container(
         height: 120,
@@ -43,7 +42,7 @@ class Cards extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                   
                 ),
-                child: Image.network(items[index].imageUrl,fit: BoxFit.cover,),
+                child: Image.network(dbname.imagelink,fit: BoxFit.cover,),
                 )
                 ),
             Expanded(         
@@ -52,9 +51,9 @@ class Cards extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(items[index].itemName),
+            Text(items[index][dbname.itemname]),
             const SizedBox(height: 20,),
-            Text(items[index].price.toString()),
+            Text(items[index][dbname.price].toString()),
             const SizedBox(height: 20,),
             Expanded(
               child: ListView(
@@ -80,8 +79,8 @@ class Cards extends StatelessWidget {
                   InkWell(
                     onTap: (){
                     
-                      items[index].quantity++;
-                      itemprovider.changequantity(index,items[index].quantity);
+                      items[index][dbname.quantity]++;
+                      itemprovider.changequantity(index,items[index][dbname.quantity]);
                     },
                     child: Container(
                       height: 30,
@@ -97,18 +96,18 @@ class Cards extends StatelessWidget {
                     flex: 1,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Center(child: Text(items[index].quantity.toString(),style: const TextStyle(fontSize: 20),)),
+                      child: Center(child: Text(items[index][dbname.quantity].toString(),style: const TextStyle(fontSize: 20),)),
                     ),
                   ), 
                   InkWell(
                       onTap: (){
                         // log('Added ${items[index].quantity--}');
-                         items[index].quantity--;
-                         if(items[index].quantity <= 0){
+                         items[index][dbname.quantity]--;
+                         if(items[index][dbname.quantity] <= 0){
                            itemprovider.changequantity(index,0);
                          }
                          else{
-                      itemprovider.changequantity(index,items[index].quantity);
+                      itemprovider.changequantity(index,items[index][dbname.quantity]);
                          }
                     },
                     child: Container(
